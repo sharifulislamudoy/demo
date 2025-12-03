@@ -41,7 +41,7 @@ const HeroSection = () => {
     ];
 
     return (
-        <section className="relative overflow-hidden bg-gradient-to-b from-white to-gray-50">
+        <section className="min-h-screen relative overflow-hidden bg-gradient-to-b from-white to-gray-50">
             {/* Background decorative elements */}
             <div className="absolute inset-0 overflow-hidden">
                 <motion.div
@@ -75,15 +75,6 @@ const HeroSection = () => {
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     {/* Left content */}
                     <div className="text-center lg:text-left">
-                        {/* Badge */}
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={controls}
-                            className="inline-flex items-center gap-2 bg-[#E2CC40]/10 text-[#E2CC40] px-4 py-2 rounded-full mb-6"
-                        >
-                            <Star className="w-4 h-4 fill-current" />
-                            <span className="font-semibold">Trusted by 10,000+ students worldwide</span>
-                        </motion.div>
 
                         {/* Main heading */}
                         <motion.h1
@@ -171,7 +162,7 @@ const HeroSection = () => {
                         transition={{ delay: 0.4 }}
                         className="relative"
                     >
-                        <div className="relative max-w-xl mx-auto">
+                        <div className="relative w-full mx-auto">
                             {/* Main card */}
                             <div className="relative bg-white rounded-3xl shadow-2xl p-8 transform rotate-2 hover:rotate-0 transition-transform duration-500">
                                 {/* Card header */}
@@ -190,11 +181,7 @@ const HeroSection = () => {
                                 {/* Course image */}
                                 <div className="relative rounded-2xl overflow-hidden mb-6">
                                     <div className="aspect-video bg-gradient-to-br from-[#E2CC40] to-[#011F2F] relative">
-                                        <div className="absolute inset-0 flex items-center justify-center">
-                                            <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                                                <Play className="w-10 h-10 text-white fill-current" />
-                                            </div>
-                                        </div>
+                                        <img src="/hero.jpg" alt="hero" className='w-full h-[400px] object-cover' />
                                     </div>
                                     <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full">
                                         <span className="text-sm font-semibold text-[#011F2F]">Free Preview</span>
@@ -248,23 +235,6 @@ const HeroSection = () => {
                                     <div>
                                         <p className="font-semibold text-[#011F2F]">Live Class</p>
                                         <p className="text-sm text-gray-600">Starts in 30min</p>
-                                    </div>
-                                </div>
-                            </motion.div>
-
-                            <motion.div
-                                className="absolute -bottom-4 -left-4 bg-white p-4 rounded-2xl shadow-lg border"
-                                initial={{ y: 20, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
-                                transition={{ delay: 0.8, duration: 0.8 }}
-                            >
-                                <div className="flex items-center gap-3">
-                                    <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[#E2CC40] to-[#011F2F] flex items-center justify-center">
-                                        <Award className="w-5 h-5 text-white" />
-                                    </div>
-                                    <div>
-                                        <p className="font-semibold text-[#011F2F]">Certificate</p>
-                                        <p className="text-sm text-gray-600">Industry Recognized</p>
                                     </div>
                                 </div>
                             </motion.div>
