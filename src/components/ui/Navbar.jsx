@@ -115,9 +115,9 @@ const Navbar = () => {
                 whileTap={{ scale: 0.95 }}
               >
                 <Link
-                  href="/login"
+                  href="/auth/login"
                   className={`flex items-center space-x-2 px-6 py-3 font-semibold rounded-full transition-all duration-300 ${
-                    pathname === '/login'
+                    pathname === '/auth/login'
                       ? 'bg-[#E2CC40] text-[#011F2F]'
                       : 'bg-[#011F2F] text-white hover:bg-[#E2CC40] hover:text-[#011F2F]'
                   }`}

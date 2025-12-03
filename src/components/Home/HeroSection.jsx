@@ -205,16 +205,6 @@ const HeroSection = () => {
                                         <span className="text-2xl font-bold text-[#E2CC40]">$99</span>
                                     </div>
 
-                                    <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-                                        <motion.div
-                                            className="h-full bg-gradient-to-r from-[#E2CC40] to-[#011F2F]"
-                                            initial={{ width: 0 }}
-                                            animate={{ width: '75%' }}
-                                            transition={{ delay: 0.8, duration: 1.5, ease: 'easeOut' }}
-                                        />
-                                    </div>
-                                    <p className="text-sm text-gray-600">75% of students completed this course</p>
-
                                     <button className="w-full bg-[#011F2F] text-white py-3 rounded-xl font-semibold hover:bg-[#E2CC40] hover:text-[#011F2F] transition-all duration-300 transform hover:scale-[1.02]">
                                         Enroll Now
                                     </button>
