@@ -160,7 +160,7 @@ const HeroSection = () => {
                         initial={{ opacity: 0, scale: 0.8 }}
                         animate={controls}
                         transition={{ delay: 0.4 }}
-                        className="relative"
+                        className="relative hidden lg:flex"
                     >
                         <div className="relative w-full mx-auto">
                             {/* Main card */}
@@ -245,7 +245,7 @@ const HeroSection = () => {
 
             {/* Scroll indicator */}
             <motion.div
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                className="absolute hidden lg:flex bottom-8 left-1/2 transform -translate-x-1/2"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
