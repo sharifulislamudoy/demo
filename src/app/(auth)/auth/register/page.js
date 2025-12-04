@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { UserPlus, User, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser, clearError } from '@/lib/redux/slices/authSlice';
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -15,7 +17,9 @@ export default function RegisterPage() {
     confirmPassword: '',
   });
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  
+  const dispatch = useDispatch();
+  const { isLoading, error } = useSelector((state) => state.auth);
 
   const validateForm = () => {
     const newErrors = {};
@@ -53,15 +57,20 @@ export default function RegisterPage() {
       return;
     }
     
-    setIsLoading(true);
+    // Clear any previous errors
+    dispatch(clearError());
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Registration data:', formData);
-      setIsLoading(false);
-      // In real app, you would handle registration here
-      // Then redirect to login or dashboard
-    }, 1000);
+    // Prepare user data (exclude confirmPassword)
+    const userData = {
+      fullName: formData.fullName,
+      email: formData.email,
+      password: formData.password,
+    };
+    
+    // Dispatch registration action
+    dispatch(registerUser(userData));
+    
+    // Form data will be logged in authSlice when registerUser is fulfilled
   };
 
   const handleChange = (e) => {
@@ -70,6 +79,10 @@ export default function RegisterPage() {
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+    // Clear Redux error if exists
+    if (error) {
+      dispatch(clearError());
     }
   };
 
@@ -88,6 +101,17 @@ export default function RegisterPage() {
           Start your learning journey with us today
         </p>
       </div>
+
+      {/* Display Redux error */}
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg"
+        >
+          <p className="text-sm text-red-600">{error}</p>
+        </motion.div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Full Name Field */}

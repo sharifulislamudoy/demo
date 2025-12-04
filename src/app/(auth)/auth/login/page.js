@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { LogIn, Mail, Lock, Eye, EyeOff } from 'lucide-react';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser, clearError } from '@/lib/redux/slices/authSlice';
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,7 +14,9 @@ export default function LoginPage() {
     password: '',
   });
   const [errors, setErrors] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  
+  const dispatch = useDispatch();
+  const { isLoading, error } = useSelector((state) => state.auth);
 
   const validateForm = () => {
     const newErrors = {};
@@ -40,14 +44,13 @@ export default function LoginPage() {
       return;
     }
     
-    setIsLoading(true);
+    // Clear any previous errors
+    dispatch(clearError());
     
-    // Simulate API call
-    setTimeout(() => {
-      console.log('Login data:', formData);
-      setIsLoading(false);
-      // In real app, you would handle authentication here
-    }, 1000);
+    // Dispatch login action with form data
+    dispatch(loginUser(formData));
+    
+    // Form data will be logged in authSlice when loginUser is fulfilled
   };
 
   const handleChange = (e) => {
@@ -56,6 +59,10 @@ export default function LoginPage() {
     // Clear error when user starts typing
     if (errors[name]) {
       setErrors(prev => ({ ...prev, [name]: '' }));
+    }
+    // Clear Redux error if exists
+    if (error) {
+      dispatch(clearError());
     }
   };
 
@@ -74,6 +81,17 @@ export default function LoginPage() {
           Enter your credentials to access your dashboard
         </p>
       </div>
+
+      {/* Display Redux error */}
+      {error && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-4 p-3 bg-red-50 border border-red-200 rounded-lg"
+        >
+          <p className="text-sm text-red-600">{error}</p>
+        </motion.div>
+      )}
 
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* Email Field */}
